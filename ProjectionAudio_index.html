@@ -1,52 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Audio Streaming Test</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2em;
-      background-color: #111;
-      color: #fff;
-      text-align: center;
-    }
-    audio {
-      margin-top: 1em;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projection Audio</title>
 </head>
 <body>
-  <h1>🔊 Audio Streaming Test</h1>
-  <p>The audio will start at the same point in the loop for everyone.</p>
-
-  <!-- Audio element -->
-  <audio id="audioElement" autoplay loop>
-    <source src="https://antnhec.github.io/sound/audio.mp3" type="audio/mp3" />
-    Your browser does not support the audio element.
+  <h1>Projection Audio</h1>
+  <p>This is where the audio will play. It's synced with the projection video!</p>
+  
+  <!-- Audio Element -->
+  <audio id="audio" loop autoplay>
+    <source src="looped-audio.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
   </audio>
 
   <script>
-    const audio = document.getElementById('audioElement');
-    const loopDuration = 5724; // Loop duration in seconds (1 hour 35 minutes 24 seconds)
-
-    window.addEventListener('load', () => {
-      // Get current time of day in seconds (from midnight)
-      const now = new Date();
-      const secondsSinceMidnight =
-        now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-        
-      // Calculate offset in the loop
-      const offset = secondsSinceMidnight % loopDuration;
-
-      // Sync audio to the calculated offset point in the loop
-      audio.currentTime = offset;
-    });
+    // Get the audio element
+    const audio = document.getElementById('audio');
+    
+    // Wait for the audio to be loaded and then start from the current position
+    audio.oncanplaythrough = function() {
+      // You can add extra logic here to control where it starts or where it continues
+      // The audio will loop naturally because of the loop attribute
+    }
   </script>
+
 </body>
 </html>
