@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projection Audio</title>
+  <title>Audio Streaming Test</title>
   <style>
     body {
       font-family: sans-serif;
@@ -19,32 +18,34 @@
     }
     audio {
       margin-top: 1em;
-      width: 100%;
-      max-width: 400px;
     }
   </style>
 </head>
 <body>
-  <h1>🔊 Audio for Projection</h1>
-  <p>Please use headphones.<br>
-  Audio is synced to the projection and loops continuously.</p>
+  <h1>🔊 Audio Streaming Test</h1>
+  <p>The audio will start at the same point in the loop for everyone.</p>
 
-  <audio id="loopAudio" controls autoplay loop>
-    <source src="https://www.dropbox.com/scl/fi/pa9d9yuufl9kmzdwsryrv/audiocompressedmp4.mp3?rlkey=t9kmrl2reg52qygso2xuuj3t8&raw=1" type="audio/mp3" />
+  <!-- Audio element -->
+  <audio id="audioElement" autoplay loop>
+    <source src="https://antnhec.github.io/sound/audio.mp3" type="audio/mp3" />
     Your browser does not support the audio element.
   </audio>
 
   <script>
-    const audio = document.getElementById('loopAudio');
-    const loopDuration = 5724; // 1 hr 35 mins 24 seconds
+    const audio = document.getElementById('audioElement');
+    const loopDuration = 5724; // Loop duration in seconds (1 hour 35 minutes 24 seconds)
 
-    audio.addEventListener('loadedmetadata', () => {
+    window.addEventListener('load', () => {
+      // Get current time of day in seconds (from midnight)
       const now = new Date();
       const secondsSinceMidnight =
         now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+        
+      // Calculate offset in the loop
       const offset = secondsSinceMidnight % loopDuration;
+
+      // Sync audio to the calculated offset point in the loop
       audio.currentTime = offset;
-      audio.play();
     });
   </script>
 </body>
