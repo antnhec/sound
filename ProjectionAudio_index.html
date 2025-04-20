@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,20 +11,10 @@
   
   <!-- Audio Element -->
   <audio id="audio" loop autoplay>
-    <source src="looped-audio.mp3" type="audio/mp3">
+    <source src="https://raw.githubusercontent.com/antnhec/sound/main/looped-audio.mp3" type="audio/mp3">
     Your browser does not support the audio tag.
   </audio>
 
-  <script>
-    // Get the audio element
-    const audio = document.getElementById('audio');
-    
-    // Wait for the audio to be loaded and then start from the current position
-    audio.oncanplaythrough = function() {
-      // You can add extra logic here to control where it starts or where it continues
-      // The audio will loop naturally because of the loop attribute
-    }
-  </script>
-
 </body>
 </html>
+
