@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projection Audio</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2em;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+    }
+    audio {
+      margin-top: 1em;
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔊 Audio for Projection</h1>
+  <p>Please use headphones.<br>
+  Audio is synced to the projection and loops continuously.</p>
+
+  <audio id="loopAudio" controls autoplay loop>
+    <source src="https://www.dropbox.com/scl/fi/pa9d9yuufl9kmzdwsryrv/audiocompressedmp4.mp3?rlkey=t9kmrl2reg52qygso2xuuj3t8&raw=1" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const audio = document.getElementById('loopAudio');
+    const loopDuration = 5724; // 1 hr 35 mins 24 seconds
+
+    audio.addEventListener('loadedmetadata', () => {
+      const now = new Date();
+      const secondsSinceMidnight =
+        now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+      const offset = secondsSinceMidnight % loopDuration;
+      audio.currentTime = offset;
+      audio.play();
+    });
+  </script>
+</body>
+</html>
